@@ -1,0 +1,98 @@
+package lecteur.redacteur.test;
+import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+/**
+ *
+ * @author walid
+ */
+public class fichier {
+     static Semaphore mutex = new Semaphore(1);
+    static Semaphore fichier_ = new Semaphore(1);
+    //static Semaphore lire = new Semaphore(0);
+             int nb_lect;
+      //      int nb_red;
+    fichier()
+    {
+        nb_lect=0;
+        //nb_red=0;
+    }
+    public  void fichier_lire(fichier x) throws InterruptedException
+           
+  {
+       if(nb_lect==0)
+        {
+                
+           try {
+               fichier_.acquire();
+           } catch (InterruptedException ex) {
+               Logger.getLogger(fichier.class.getName()).log(Level.SEVERE, null, ex);
+           }
+            }
+         try {
+             mutex.acquire();
+         } catch (InterruptedException ex) {
+             Logger.getLogger(fichier.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        nb_lect++;
+        mutex.release();
+        
+        
+        // try {
+         //    mutex.acquire();
+         //} catch (InterruptedException ex) {
+          //   Logger.getLogger(fichier.class.getName()).log(Level.SEVERE, null, ex);
+        // }
+             
+          //   if(x.nb_red==0)
+            //     {
+              //       System.out.println("acun rdcteu");
+                //     mutex.release();
+                    
+                     
+                 //}/
+             //else 
+             //{x.nb_red--;
+             System.out.println("My Name is :- " + Thread.currentThread().getName());
+             System.out.println("lireeeeeeeeeeeee" +nb_lect);
+             
+         try {
+             mutex.acquire();
+         } catch (InterruptedException ex) {
+             Logger.getLogger(fichier.class.getName()).log(Level.SEVERE, null, ex);
+                     
+             
+         }
+             nb_lect--;
+             mutex.release();
+             
+              System.out.println("relase"+nb_lect);
+         
+             
+             if(nb_lect==0)
+                 fichier_.release();
+             
+        Thread.sleep(4000);
+        
+}
+ 
+   public void fichier_ecrire(fichier x)
+  
+   {
+             
+         try {
+             fichier_.acquire();
+             System.out.println("My Name is :- " + Thread.currentThread().getName());
+             System.out.println("ecrirrrrrrrrrrrrrrrrrrr");
+            
+             fichier_.release();
+             System.out.println("release");
+             Thread.sleep(4000);
+         } catch (InterruptedException ex) {
+             Logger.getLogger(fichier.class.getName()).log(Level.SEVERE, null, ex);
+         }
+            
+              
+         
+}
+}
