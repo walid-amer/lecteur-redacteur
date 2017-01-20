@@ -1,0 +1,26 @@
+package lecteur.redacteur.test;
+//**
+ //*
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+ //* @author walid
+ 
+public class lecteur extends Thread{
+    fichier x;
+    lecteur(fichier y)
+    {x=y;}
+    @Override
+    public void run()
+    {
+        while(true)
+        
+            try {
+                x.fichier_lire(x);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(lecteur.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    
+    }
+}
