@@ -1,0 +1,20 @@
+ackage lecteur.redacteur.test;
+import java.util.concurrent.Semaphore;
+/**
+ *
+ * @author walid
+ */
+public class redacteur extends Thread {
+    fichier x;
+    //static Semaphore mutex_ = new Semaphore(1);
+    redacteur(fichier y)
+    {
+    x=y;
+    }
+    public void run()
+    {while(true)
+        x.fichier_ecrire(x);
+    
+    }
+    
+}
